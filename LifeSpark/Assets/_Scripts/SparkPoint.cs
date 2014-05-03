@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SparkPoint : MonoBehaviour {
 
+	private LineRenderer Beam;
+	
 	bool particlesOn;
 	int playerCaptured;
 	bool captured;
@@ -23,6 +25,17 @@ public class SparkPoint : MonoBehaviour {
 		playerId = -1;
 		stealing = false;
 		destroyed = false;
+		
+
+		Beam = this.gameObject.AddComponent<LineRenderer>();
+		Beam.material = new Material (Shader.Find("Particles/Additive")); 
+		Beam.castShadows = false;
+		Beam.receiveShadows = false;
+		Beam.SetVertexCount(2);
+		Beam.SetColors(Color.white, Color.white);
+		Beam.SetWidth(0.2f, 0.2f);
+		Beam.useWorldSpace = true;
+		Beam.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -60,6 +73,35 @@ public class SparkPoint : MonoBehaviour {
 			}
 		//}
 
+		
+		if (captured)
+		{
+			Vector3 srcPos = gameObject.transform.position;
+			Vector3 dstPos;
+			float minDistance = 0;
+			Beam.SetPosition(0, srcPos);
+			//Beam.SetPosition(1, new Vector3(1,1,1));
+			
+			IndividualMinionController[] minions = GameObject.FindObjectsOfType(typeof(IndividualMinionController))
+				as IndividualMinionController[];
+			Beam.enabled = false;
+			if(minions.Length>0)
+			{
+				for(int i =0;i<minions.Length;i++)
+				{
+					if (minions[0].minionId == playerId)
+						continue;
+					float distance = Vector3.Distance(minions[i].gameObject.transform.position,srcPos);
+					if (distance < minDistance || minDistance == 0)
+					{
+						minDistance = distance;
+						dstPos = minions[i].gameObject.transform.position;
+						Beam.SetPosition(1, dstPos);
+						Beam.enabled = true;
+					}
+				}
+			}
+		}
 	}
 
 	void OnCollisionEnter (Collision collision) {
