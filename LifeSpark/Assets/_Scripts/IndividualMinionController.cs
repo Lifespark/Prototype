@@ -27,12 +27,20 @@ public class IndividualMinionController : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Network.isServer && networkView.isMine || Network.isClient && !networkView.isMine) {
-			this.gameObject.renderer.material.color = Color.red;
-		}
-		else if (Network.isClient && networkView.isMine || Network.isServer && !networkView.isMine) {
-			this.gameObject.renderer.material.color = Color.blue;
-		}
+        switch (minionId) {
+            case 1:
+                this.gameObject.renderer.material.color = Color.red;
+                break;
+            case 2:
+                this.gameObject.renderer.material.color = Color.blue;
+                break;
+            case 3:
+                this.gameObject.renderer.material.color = Color.yellow;
+                break;
+            case 4:
+                this.gameObject.renderer.material.color = Color.green;
+                break;
+        }
 		//Move towards the target node
 		if (targetNode != null) {
 			Vector3 targetPosition = new Vector3 (targetNode.transform.position.x, transform.position.y, targetNode.transform.position.z);
@@ -48,6 +56,7 @@ public class IndividualMinionController : MonoBehaviour {
 		}
 	}
 
+    [RPC]
 	public void SetMinionId (int id) {
 		minionId = id;
 		Debug.Log (id);

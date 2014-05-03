@@ -21,6 +21,8 @@ public class SparkPointBoss : MonoBehaviour {
 	public SparkPoint SparkPoint7;
 	public SparkPoint SparkPoint8;
 
+    NetworkManager NetMgr;
+
 	// Use this for initialization
 	void Start () {
 		particlesOn = false;
@@ -30,6 +32,7 @@ public class SparkPointBoss : MonoBehaviour {
 		destroyed = false;
 		inputOne = false;
 		inputTwo = false;
+        NetMgr = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
 	}
 	
 	// Update is called once per frame
@@ -136,10 +139,7 @@ public class SparkPointBoss : MonoBehaviour {
 			captureTimer += Time.deltaTime;
 			if (captureTimer >= 3.0f) {
 				captured = true;
-				GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-				for(int i = 0; i < players.Length; i++) {
-					players[i].gameObject.GetComponent<Player>().SpawnBoss();
-				}
+                NetMgr.SpawnBoss();
 				Explode();
 			}
 			else if (captureTimer >= 2.5f) {

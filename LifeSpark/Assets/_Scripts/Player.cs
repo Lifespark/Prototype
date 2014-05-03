@@ -26,6 +26,8 @@ public class Player : MonoBehaviour {
 	private Vector3 syncEndPosition = Vector3.zero;
     public GameObject projectilePrefab;
 
+    public bool ismine = false;
+
 	void Start () {
 		networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
 		translate = Vector3.zero;
@@ -37,28 +39,25 @@ public class Player : MonoBehaviour {
 		playerId = id;
 		id+=1;
         Debug.Log(playerId);
-        if (Network.isServer && networkView.isMine || Network.isClient && !networkView.isMine) {
-			this.gameObject.renderer.material.color = Color.red;
-		}
-        else if (Network.isClient && networkView.isMine || Network.isServer && !networkView.isMine) {
-			this.gameObject.renderer.material.color = Color.blue;
-		}
+
 		respawnTimer = -1f;
 		respawnPoint = null;
 		needRespawn = false;
 
-		minionController = (GameObject) Instantiate (minionController);
+		//minionController = (GameObject) Instantiate (minionController);
+        //minionController.GetComponent<MinionController>().id = playerId;
 	}
 	
 	void Update () {
 		//later may want to move all input to server side -- server takes all input, then moves things -- more secure
-		if (networkView.isMine) {
+		if (ismine) {
 			PlayerInput ();
             //Debug.Log();
 		}
-		else {
-			SyncedMovement ();
-		}
+		//else {
+		//	SyncedMovement ();
+		//}
+        MovePlayer();
 	}
 
 	void PlayerInput () {
@@ -84,7 +83,8 @@ public class Player : MonoBehaviour {
 				Debug.Log (hit.collider.name);
 				if (hit.collider.tag == "Ground" || hit.collider.tag == "Lane")
 				{
-					translate = hit.point;
+					//translate = hit.point;
+                    networkView.RPC("NetworkMove", RPCMode.AllBuffered, hit.point);
 					moveSparkPoint = false;
 				}
 				/*
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
-
+        /*
 		if (translate != Vector3.zero)
 		{
 			rigidbody.MovePosition(rigidbody.position + Vector3.Normalize(translate - rigidbody.position) * speed * Time.deltaTime);
@@ -137,8 +137,31 @@ public class Player : MonoBehaviour {
 				}
 			}
 		}
+        */
 	}
 
+    void MovePlayer() {
+        if (translate != Vector3.zero) {
+            rigidbody.MovePosition(rigidbody.position + Vector3.Normalize(translate - rigidbody.position) * speed * Time.deltaTime);
+            if (moveSparkPoint) {
+                if (rigidbody.position.x >= translate.x - correctingFactorSparkPoint
+                    && rigidbody.position.x <= translate.x + correctingFactorSparkPoint
+                    && rigidbody.position.z >= translate.z - correctingFactorSparkPoint
+                    && rigidbody.position.z <= translate.z + correctingFactorSparkPoint) {
+                    translate = Vector3.zero;
+                }
+            }
+            else {
+                if (rigidbody.position.x >= translate.x - correctingFactorMove
+                    && rigidbody.position.x <= translate.x + correctingFactorMove
+                    && rigidbody.position.z >= translate.z - correctingFactorMove
+                    && rigidbody.position.z <= translate.z + correctingFactorMove) {
+                    translate = Vector3.zero;
+                }
+            }
+        }
+    }
+    /*
 	void OnSerializeNetworkView (BitStream stream, NetworkMessageInfo info) {
 		//use navmesh for even smoother inperolation prediction
 		Vector3 syncPosition = Vector3.zero;
@@ -164,7 +187,7 @@ public class Player : MonoBehaviour {
 			//rigidbody.position = syncPosition;
 		}
 	}
-	
+	*/
 	private void SyncedMovement () {
 		syncTime += Time.deltaTime;
 		rigidbody.position = Vector3.Lerp (syncStartPosition, syncEndPosition, syncTime / syncDelay);
@@ -204,12 +227,6 @@ public class Player : MonoBehaviour {
         */
     }
 
-	public void SpawnBoss() {
-		if (Network.isServer && networkView.isMine) {
-			GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>().SpawnBoss();
-		}
-	}
-
 	public GameObject GetRespawnPoint() {
 		return respawnPoint;
 	}
@@ -220,4 +237,31 @@ public class Player : MonoBehaviour {
 
 	}
 
+    [RPC]
+    void SetNetworkPlayer(NetworkPlayer np, int id) {
+        if (np == Network.player) {
+            ismine = true;// Or disable this script if the NetworkPlayer doesn't match.
+        }
+        playerId = id;
+
+        switch (playerId) {
+            case 1:
+                this.gameObject.renderer.material.color = Color.red;
+                break;
+            case 2:
+                this.gameObject.renderer.material.color = Color.blue;
+                break;
+            case 3:
+                this.gameObject.renderer.material.color = Color.yellow;
+                break;
+            case 4:
+                this.gameObject.renderer.material.color = Color.green;
+                break;
+        }
+    }
+
+    [RPC]
+    public void NetworkMove(Vector3 trans) {
+        translate = trans;
+    }
 }
