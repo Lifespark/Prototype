@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{DA148C83-E195-A8E8-7885-881BC282D3D2}") = "LifeSpark", "Assembly-CSharp.csproj", "{89A14016-7E45-6226-0031-1F1CCEDB6642}"
 EndProject
+Project("{DA148C83-E195-A8E8-7885-881BC282D3D2}") = "LifeSpark", "Assembly-CSharp-Editor.csproj", "{1FB77E11-C0CA-94DB-5461-57AF99E68033}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{89A14016-7E45-6226-0031-1F1CCEDB6642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89A14016-7E45-6226-0031-1F1CCEDB6642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89A14016-7E45-6226-0031-1F1CCEDB6642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FB77E11-C0CA-94DB-5461-57AF99E68033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FB77E11-C0CA-94DB-5461-57AF99E68033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FB77E11-C0CA-94DB-5461-57AF99E68033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FB77E11-C0CA-94DB-5461-57AF99E68033}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																														GlobalSection(MonoDevelopProperties) = preSolution
+																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
