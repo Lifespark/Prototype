@@ -1,17 +1,23 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviour {
+
+    const int PLAYER_NUM = 2;
 
 	private const string typeName = "LifeSpark";
 	private const string gameName = "LifeSparkRoomOne";
 	private HostData[] hostList;
 	public GameObject playerPrefab;
     public GameObject bossPrefab;
-
+    public GameObject levelPrefab;
 
     private int playerCount = 0;
     private bool isRefreshingHostList = false;
+
+    Dictionary<int, NetworkPlayer> playerMap = new Dictionary<int, NetworkPlayer>();
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +43,7 @@ public class NetworkManager : MonoBehaviour {
 	void OnConnectedToServer () {
 		Debug.Log ("Server Joined");
 
-		SpawnPlayer ();
+		//SpawnPlayer ();
         //SpawnBoss();
 	}
 
@@ -49,15 +55,41 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnServerInitialized () {
 		Debug.Log ("Server Initialized");
-		SpawnPlayer ();
+		//SpawnPlayer ();
 	}
+    void OnPlayerConnected(NetworkPlayer player) {
+        //Debug.Log("Player " + playerCount++ + " connected from " + player.ipAddress + ":" + player.port);
+        playerCount++;
+        playerMap.Add(playerCount, player);
+        //SpawnPlayer(player);
 
+        if (playerCount == PLAYER_NUM) {
+            SpawnLevel();
+            foreach (KeyValuePair<int, NetworkPlayer> entry in playerMap) {
+                SpawnPlayer(entry.Value, entry.Key);
+            }
+        }
+    }
+
+    private void SpawnPlayer(NetworkPlayer np, int id) {
+        GameObject playerObj = Network.Instantiate(playerPrefab, new Vector3(4*id, 10f, 2f), Quaternion.identity, 0) as GameObject;
+        playerObj.networkView.RPC("SetNetworkPlayer", RPCMode.AllBuffered, np, id);
+    }
+
+    private void SpawnLevel() {
+        GameObject playerObj = Network.Instantiate(levelPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0) as GameObject;
+    }
+
+    /*
 	private void SpawnPlayer () {
 		Network.Instantiate (playerPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
 	}
+    */
+
 
     public void SpawnBoss() {
-        Network.Instantiate(bossPrefab, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+        if (Network.isServer)
+            Network.Instantiate(bossPrefab, new Vector3(0f, 15f, 0f), Quaternion.identity, 0);
     }
 
 	public void DestroyNetworkObject (GameObject gameObject) {
@@ -100,4 +132,6 @@ public class NetworkManager : MonoBehaviour {
     void setPlayerCount(int count) {
         playerCount = count;
     }
+
+
 }
