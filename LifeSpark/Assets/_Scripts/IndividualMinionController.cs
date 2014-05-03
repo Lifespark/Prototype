@@ -14,7 +14,7 @@ public class IndividualMinionController : MonoBehaviour {
 	private GameObject networkManager;
 	
 	public int minionId;
-	public GameObject targetNode;
+	public Vector3 targetNode;
 	Color minionColor;
 
 	void Start () {
@@ -43,15 +43,27 @@ public class IndividualMinionController : MonoBehaviour {
         }
 		//Move towards the target node
 		if (targetNode != null) {
-			Vector3 targetPosition = new Vector3 (targetNode.transform.position.x, transform.position.y, targetNode.transform.position.z);
+			Vector3 targetPosition = new Vector3 (targetNode.x, transform.position.y, targetNode.z);
 			gameObject.transform.position = Vector3.MoveTowards (transform.position, targetPosition, moveSpeed);
 		
 			//Check if it reached the target
 			if (transform.position == targetPosition) {
 				//Destroy the object
-				GameObject.FindGameObjectWithTag("MinionController").GetComponent<MinionController>().minionsSpawned--;
+				//GameObject.FindGameObjectWithTag("MinionController").GetComponent<MinionController>().minionsSpawned--;
+
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+                foreach (GameObject p in players) {
+                    MinionController mc = p.GetComponent<MinionController>();
+                    if (mc.id == minionId) {
+                        mc.networkView.RPC("MinusMinion", RPCMode.AllBuffered);
+
+                        break;
+                    }
+                }
 
 				Network.Destroy (GetComponent<NetworkView> ().viewID);
+                //Destroy(gameObject);
 			}
 		}
 	}
@@ -59,14 +71,14 @@ public class IndividualMinionController : MonoBehaviour {
     [RPC]
 	public void SetMinionId (int id) {
 		minionId = id;
-		Debug.Log (id);
+		//Debug.Log (id);
 	}
 	
 	[RPC]
 	public void SetMinionPosition (Vector3 pposition) {
 		rigidbody.position = pposition;
 	}
-	public void SetMinionTarget (GameObject targetObj) {
+	public void SetMinionTarget (Vector3 targetObj) {
 		targetNode = targetObj;
 	}
 }

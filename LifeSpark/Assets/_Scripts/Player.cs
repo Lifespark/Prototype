@@ -17,7 +17,8 @@ public class Player : MonoBehaviour {
 	private GameObject respawnPoint;
 	private float respawnTimer;
 	private bool needRespawn;
-	public GameObject minionController;
+	//public GameObject minionController;
+    public MinionController minionController;
 	/* Networking variables. -jk */
 	private float lastSynchronizationTime = 0f;
 	private float syncDelay = 0f;
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour {
 		respawnPoint = null;
 		needRespawn = false;
 
+        minionController = GetComponent<MinionController>();
 		//minionController = (GameObject) Instantiate (minionController);
         //minionController.GetComponent<MinionController>().id = playerId;
 	}
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour {
 				if (hit.collider.tag == "Ground" || hit.collider.tag == "Lane")
 				{
 					//translate = hit.point;
-                    networkView.RPC("NetworkMove", RPCMode.AllBuffered, hit.point);
+                    networkView.RPC("NetworkMove", RPCMode.Server, hit.point);
 					moveSparkPoint = false;
 				}
 				/*
@@ -98,17 +100,18 @@ public class Player : MonoBehaviour {
 					translate = Vector3.zero;
 					Vector3 projPosition = hit.collider.gameObject.transform.position - rigidbody.position;
 					projPosition.Normalize();
-					projPosition += rigidbody.position;
+                    projPosition = projPosition * 2 + rigidbody.position;
                     Material mat = gameObject.renderer.material;
 					//networkManager.GetComponent<NetworkManager>().SpawnProjectile(projPosition, projPosition - rigidbody.position, playerId, mat.color);
 					//SpawnBullet (projPosition,projPosition - rigidbody.position, playerId);
-                    SpawnProjectile(projPosition, projPosition - rigidbody.position, playerId, mat.color.r, mat.color.g, mat.color.b);
-                    //networkView.RPC("SpawnProjectile", RPCMode.AllBuffered, rigidbody.position, projPosition - rigidbody.position, playerId, mat.color.r, mat.color.g, mat.color.b);
+                    //SpawnProjectile(projPosition, projPosition - rigidbody.position, playerId, mat.color.r, mat.color.g, mat.color.b);
+                    networkView.RPC("SpawnProjectile", RPCMode.Server, projPosition, projPosition - rigidbody.position, playerId, mat.color.r, mat.color.g, mat.color.b);
 				}
 				else if (hit.collider.tag == "SparkPoint")
 				{
-					minionController.GetComponent<MinionController> ().targetNode = hit.collider.gameObject;
-
+					//minionController.GetComponent<MinionController> ().targetNode = hit.collider.gameObject;
+                    //minionController.targetNode = hit.collider.gameObject;
+                    networkView.RPC("SetTargetNode", RPCMode.AllBuffered, hit.collider.gameObject.transform.position);
 				}
 			}
 		}
@@ -218,7 +221,8 @@ public class Player : MonoBehaviour {
         projectilePrefab.GetComponent<Projectile>().SetProjectileId(id);
         GameObject bullet = Network.Instantiate(projectilePrefab, position, Quaternion.identity, 0) as GameObject;
         //bullet.GetComponent<Projectile>().SetProjectileColor(new Color(r, g, b));
-        bullet.GetComponent<Projectile>().SetProjectileId(id);
+        //bullet.GetComponent<Projectile>().SetProjectileId(id);
+        bullet.networkView.RPC("SetProjectileId", RPCMode.AllBuffered, id);
         bullet.networkView.RPC("SetProjectileColor", RPCMode.AllBuffered, r, g, b);
         /*
         bullet.GetComponent<Projectile>().SetProjectileDirection(direction);
@@ -233,8 +237,9 @@ public class Player : MonoBehaviour {
 
 	public void SetRespawnPoint (GameObject gameObject) {
 		respawnPoint = gameObject;
-		minionController.GetComponent<MinionController> ().spawnNode = gameObject;
-
+		//minionController.GetComponent<MinionController> ().spawnNode = gameObject;
+        //minionController.spawnNode = gameObject;
+        networkView.RPC("SetSpawnNode", RPCMode.AllBuffered, gameObject.transform.position);
 	}
 
     [RPC]

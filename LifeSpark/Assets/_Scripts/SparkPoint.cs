@@ -27,35 +27,39 @@ public class SparkPoint : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (particlesOn && !captured) {
-			captureTimer += Time.deltaTime;
-			if (captureTimer >= 3.0f) {
-				if (player.GetComponent<Player>().GetRespawnPoint() == null) {
-					player.GetComponent<Player>().SetRespawnPoint(this.gameObject);
+		//if (Network.isServer) {
+			if (particlesOn && !captured) {
+				captureTimer += Time.deltaTime;
+				if (captureTimer >= 3.0f) {
+					if (player.GetComponent<Player>().GetRespawnPoint() == null) {
+						player.GetComponent<Player>().SetRespawnPoint(this.gameObject);
+					}
+					captured = true;
+					ChangeColors();
+                    //networkView.RPC("ChangeColors", RPCMode.AllBuffered);
 				}
-				captured = true;
-				ChangeColors();
+				else if (captureTimer >= 2.5f) {
+					particleSystem.startSize = 5.0f;
+				}
+				else {
+					particleSystem.startSize += Time.deltaTime/2;
+				}
 			}
-			else if (captureTimer >= 2.5f) {
-				particleSystem.startSize = 5.0f;
+			else if (captured && stealing) {
+				captureTimer += Time.deltaTime;
+				if (captureTimer >= 3.0f) {
+					destroyed = true;
+					Explode();
+				}
+				else if (captureTimer >= 2.5f) {
+					particleSystem.startSize = 5.0f;
+				}
+				else {
+					particleSystem.startSize += Time.deltaTime/2;
+				}
 			}
-			else {
-				particleSystem.startSize += Time.deltaTime/2;
-			}
-		}
-		else if (captured && stealing) {
-			captureTimer += Time.deltaTime;
-			if (captureTimer >= 3.0f) {
-				destroyed = true;
-				Explode();
-			}
-			else if (captureTimer >= 2.5f) {
-				particleSystem.startSize = 5.0f;
-			}
-			else {
-				particleSystem.startSize += Time.deltaTime/2;
-			}
-		}
+		//}
+
 	}
 
 	void OnCollisionEnter (Collision collision) {
@@ -97,7 +101,7 @@ public class SparkPoint : MonoBehaviour {
 			}
 		}
 	}
-
+    [RPC]
 	void ChangeColors() {
 		playerCaptured = playerId;
 		if (playerCaptured == 1) {

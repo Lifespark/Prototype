@@ -96,7 +96,7 @@ public class Projectile : MonoBehaviour {
             Network.Destroy(GetComponent<NetworkView>().viewID);
         }
 	}
-
+    [RPC]
 	public void SetProjectileId (int id) {
 		projectileId = id;
 		Debug.Log (id);
