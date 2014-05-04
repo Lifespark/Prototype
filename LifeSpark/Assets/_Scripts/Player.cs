@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
 	/* Player's variables. -jk */
+	private LinkedList<GameObject> respawnPoints;
 	private Vector3 translate;
 	private float correctingFactorMove;
 	private float correctingFactorSparkPoint;
@@ -30,6 +32,7 @@ public class Player : MonoBehaviour {
     public bool ismine = false;
 
 	void Start () {
+		respawnPoints = new LinkedList<GameObject>();
 		networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
 		translate = Vector3.zero;
 		correctingFactorMove = 0.1f;
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update () {
+		Debug.Log (respawnPoints.Count);
 		//later may want to move all input to server side -- server takes all input, then moves things -- more secure
 		if (ismine) {
 			PlayerInput ();
@@ -70,7 +74,8 @@ public class Player : MonoBehaviour {
 
 		if (respawnTimer <= 0.0f && needRespawn) {
 			if (respawnPoint != null) {
-				rigidbody.position = new Vector3(respawnPoint.transform.position.x, 5.0f, respawnPoint.transform.position.z);
+				Vector3 targetPos = new Vector3(respawnPoint.transform.position.x, 10.0f, respawnPoint.transform.position.z);
+				networkView.RPC("NetworkTeleport",RPCMode.Server,targetPos);
 				needRespawn = false;
 			}
 		}
@@ -235,11 +240,20 @@ public class Player : MonoBehaviour {
 		return respawnPoint;
 	}
 
-	public void SetRespawnPoint (GameObject gameObject) {
-		respawnPoint = gameObject;
-		//minionController.GetComponent<MinionController> ().spawnNode = gameObject;
+	public void removeSpawnPoint(GameObject point){
+		Debug.Log (respawnPoints.Remove(point));
+		Destroy(point);
+		respawnPoint = respawnPoints.First.Value;
+	}
+
+	public void AddRespawnPoint (GameObject gameObject) {
+		if(respawnPoint == null){
+			respawnPoint = gameObject;
+			//minionController.GetComponent<MinionController> ().spawnNode = gameObject;
         //minionController.spawnNode = gameObject;
-        networkView.RPC("SetSpawnNode", RPCMode.AllBuffered, gameObject.transform.position);
+        	networkView.RPC("SetSpawnNode", RPCMode.AllBuffered, gameObject.transform.position);
+		}
+		respawnPoints.AddLast(gameObject);
 	}
 
     [RPC]
@@ -269,4 +283,9 @@ public class Player : MonoBehaviour {
     public void NetworkMove(Vector3 trans) {
         translate = trans;
     }
+
+	[RPC]
+	public void NetworkTeleport(Vector3 pos){
+		rigidbody.position = pos;
+	}
 }

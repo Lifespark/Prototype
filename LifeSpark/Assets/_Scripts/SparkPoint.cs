@@ -15,6 +15,7 @@ public class SparkPoint : MonoBehaviour {
 	bool destroyed;
     Color playerColor;
 	GameObject player;
+	GameObject owner;
 
 	// Use this for initialization
 	void Start () {
@@ -44,9 +45,8 @@ public class SparkPoint : MonoBehaviour {
 			if (particlesOn && !captured) {
 				captureTimer += Time.deltaTime;
 				if (captureTimer >= 3.0f) {
-					if (player.GetComponent<Player>().GetRespawnPoint() == null) {
-						player.GetComponent<Player>().SetRespawnPoint(this.gameObject);
-					}
+					player.GetComponent<Player>().AddRespawnPoint(this.gameObject);
+					owner = player;
 					captured = true;
 					ChangeColors();
                     //networkView.RPC("ChangeColors", RPCMode.AllBuffered);
@@ -175,7 +175,7 @@ public class SparkPoint : MonoBehaviour {
 		particleSystem.Stop();
 		this.gameObject.renderer.material.color = Color.grey;
 		playerCaptured = -1;
-		Destroy (this.gameObject);
+		owner.GetComponent<Player>().removeSpawnPoint(this.gameObject);
 	}
 
 	public bool GetParticles() {
