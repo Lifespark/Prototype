@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
 		move = false;
 		playerId = id;
 		id+=1;
-        Debug.Log(playerId);
+        //Debug.Log(playerId);
 
 		respawnTimer = -1f;
 		respawnPoint = null;
@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
 	}
 	
 	void Update () {
-		Debug.Log (respawnPoints.Count);
+		//Debug.Log (respawnPoints.Count);
 		//later may want to move all input to server side -- server takes all input, then moves things -- more secure
 		if (ismine) {
 			PlayerInput ();

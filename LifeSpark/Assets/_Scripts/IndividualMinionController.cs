@@ -15,6 +15,8 @@ public class IndividualMinionController : MonoBehaviour {
 	
 	public int minionId;
 	public Vector3 targetNode;
+
+    GameObject targetGameObject;
 	Color minionColor;
 
 	void Start () {
@@ -42,7 +44,7 @@ public class IndividualMinionController : MonoBehaviour {
                 break;
         }
 		//Move towards the target node
-		if (targetNode != null) {
+		if (targetNode != null && Network.isServer) {
 			Vector3 targetPosition = new Vector3 (targetNode.x, transform.position.y, targetNode.z);
 			gameObject.transform.position = Vector3.MoveTowards (transform.position, targetPosition, moveSpeed);
 		
@@ -57,10 +59,20 @@ public class IndividualMinionController : MonoBehaviour {
                     MinionController mc = p.GetComponent<MinionController>();
                     if (mc.id == minionId) {
                         mc.networkView.RPC("MinusMinion", RPCMode.AllBuffered);
-
                         break;
                     }
                 }
+
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1.0f);
+                int i = 0;
+                while (i < hitColliders.Length) {
+                    if (hitColliders[i].gameObject.tag == "SparkPoint") {
+                        hitColliders[i].gameObject.networkView.RPC("MinionCapture", RPCMode.AllBuffered, minionId);
+                        break;
+                    }
+                    i++;
+                }
+
 
 				Network.Destroy (GetComponent<NetworkView> ().viewID);
                 //Destroy(gameObject);

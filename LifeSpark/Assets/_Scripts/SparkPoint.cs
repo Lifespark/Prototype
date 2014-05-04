@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SparkPoint : MonoBehaviour {
+
+    const int PROGRESS_PER_MINION = 10;
+    const int TOTAL_PROGRESS = 100;
 
 	private LineRenderer Beam;
 	
@@ -17,6 +21,8 @@ public class SparkPoint : MonoBehaviour {
 	GameObject player;
 	GameObject owner;
 
+    Dictionary<int, int> minionProgressMap = new Dictionary<int, int>();
+
 	// Use this for initialization
 	void Start () {
 		particlesOn = false;
@@ -27,7 +33,6 @@ public class SparkPoint : MonoBehaviour {
 		stealing = false;
 		destroyed = false;
 		
-
 		Beam = this.gameObject.AddComponent<LineRenderer>();
 		Beam.material = new Material (Shader.Find("Particles/Additive")); 
 		Beam.castShadows = false;
@@ -73,7 +78,22 @@ public class SparkPoint : MonoBehaviour {
 			}
 		//}
 
-		
+            foreach (KeyValuePair<int, int> entry in minionProgressMap) {
+                if (entry.Value <= 0) {
+                    captured = true;
+                    playerId = entry.Key;
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject p in players) {
+                        if (p.GetComponent<Player>().getPlayerId() == entry.Value) {
+                            owner = p;
+                            break;
+                        }
+                    }
+                    ChangeColors();
+                }
+            }
+
+
 		if (captured)
 		{
 			Vector3 srcPos = gameObject.transform.position;
@@ -145,6 +165,21 @@ public class SparkPoint : MonoBehaviour {
 	}
     [RPC]
 	void ChangeColors() {
+        switch (playerCaptured) {
+            case 1:
+                playerColor = Color.red;
+                break;
+            case 2:
+                playerColor = Color.blue;
+                break;
+            case 3:
+                playerColor = Color.yellow;
+                break;
+            case 4:
+                playerColor = Color.green;
+                break;
+        }
+        
 		playerCaptured = playerId;
 		if (playerCaptured == 1) {
 			particleSystem.startSize = 0.6f;
@@ -156,6 +191,8 @@ public class SparkPoint : MonoBehaviour {
             this.gameObject.renderer.material.color = playerColor;
             particleSystem.startColor = playerColor;
 		}
+
+
 	}
 
 	void RevertColors() {
@@ -185,4 +222,14 @@ public class SparkPoint : MonoBehaviour {
 	public int GetPlayerCaptured() {
 		return playerCaptured;
 	}
+
+    [RPC]
+    void MinionCapture(int playerID) {
+        Debug.Log("Minion Capturing!");
+        if (captured) return;
+        if (minionProgressMap.ContainsKey(playerID)) 
+            minionProgressMap[playerID] -= PROGRESS_PER_MINION;
+        else
+            minionProgressMap.Add(playerID, TOTAL_PROGRESS);
+    }
 }

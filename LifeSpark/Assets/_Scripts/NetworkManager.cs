@@ -21,7 +21,7 @@ public class NetworkManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //MasterServer.ipAddress = "127.0.0.1";
+        MasterServer.ipAddress = "127.0.0.1";
 	}
 
 	private void StartServer () {
