@@ -74,6 +74,6 @@ public class MinionController : MonoBehaviour {
     [RPC]
     public void MinusMinion() {
         minionsSpawned--;
-        Debug.Log("minionsSpawned--");
+        //Debug.Log("minionsSpawned--");
     }
 }
