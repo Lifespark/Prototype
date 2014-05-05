@@ -96,7 +96,7 @@ public class SparkPoint : MonoBehaviour {
 			{
 				for(int i =0;i<minions.Length;i++)
 				{
-					if (minions[0].minionId == playerId)
+					if (minions[i].minionId == playerId)
 						continue;
 					float distance = Vector3.Distance(minions[i].gameObject.transform.position,srcPos);
 					if (distance < minDistance || minDistance == 0)
