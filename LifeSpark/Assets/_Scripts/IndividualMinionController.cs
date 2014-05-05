@@ -80,6 +80,24 @@ public class IndividualMinionController : MonoBehaviour {
 		}
 	}
 
+    void OnCollisionEnter(Collision collision) {
+        if (Network.isServer) {
+            if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<Player>().getPlayerId() != minionId) {
+                collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 2);
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+                foreach (GameObject p in players) {
+                    MinionController mc = p.GetComponent<MinionController>();
+                    if (mc.id == minionId) {
+                        mc.networkView.RPC("MinusMinion", RPCMode.AllBuffered);
+                        break;
+                    }
+                }
+                Network.Destroy(GetComponent<NetworkView>().viewID);
+            }
+        }
+    }
+
     [RPC]
 	public void SetMinionId (int id) {
 		minionId = id;

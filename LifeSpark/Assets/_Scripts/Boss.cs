@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boss : MonoBehaviour {
-    public int health = 100;
-    public delegate void OnhealthChanged(int hp);
-    public OnhealthChanged onHealthChanged;
-    bool isInited = false;
+public class Boss : LivingObject {
+    //public int health = 100;
+    
     // Use this for initialization
     void Start() {
-
+        health = 100;
     }
 
     void Awake() {

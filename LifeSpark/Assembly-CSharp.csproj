@@ -171,6 +171,7 @@
      <Compile Include="Assets\_Scripts\IndividualMinionController.cs" />
      <Compile Include="Assets\_Scripts\LaneLight.cs" />
      <Compile Include="Assets\_Scripts\LaneLightBoss.cs" />
+     <Compile Include="Assets\_Scripts\LivingObject.cs" />
      <Compile Include="Assets\_Scripts\MinionController.cs" />
      <Compile Include="Assets\_Scripts\NetworkManager.cs" />
      <Compile Include="Assets\_Scripts\Player.cs" />

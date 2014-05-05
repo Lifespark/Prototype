@@ -78,20 +78,7 @@ public class SparkPoint : MonoBehaviour {
 			}
 		//}
 
-            foreach (KeyValuePair<int, int> entry in minionProgressMap) {
-                if (entry.Value <= 0) {
-                    captured = true;
-                    playerId = entry.Key;
-                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                    foreach (GameObject p in players) {
-                        if (p.GetComponent<Player>().getPlayerId() == entry.Value) {
-                            owner = p;
-                            break;
-                        }
-                    }
-                    ChangeColors();
-                }
-            }
+            MinionCaptureCheck();
 
 
 		if (captured)
@@ -109,7 +96,7 @@ public class SparkPoint : MonoBehaviour {
 			{
 				for(int i =0;i<minions.Length;i++)
 				{
-					if (minions[0].minionId == playerId)
+					if (minions[i].minionId == playerId)
 						continue;
 					float distance = Vector3.Distance(minions[i].gameObject.transform.position,srcPos);
 					if (distance < minDistance || minDistance == 0)
@@ -163,9 +150,48 @@ public class SparkPoint : MonoBehaviour {
 			}
 		}
 	}
+
+    void MinionCaptureCheck() {
+        if (!captured) {
+            bool minionCaptureStateChanged = false;
+            foreach (KeyValuePair<int, int> entry in minionProgressMap) {
+                if (entry.Value < 0) {
+                    minionCaptureStateChanged = true;
+                    captured = true;
+                    playerId = entry.Key;
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject p in players) {
+                        if (p.GetComponent<Player>().getPlayerId() == entry.Key) {
+                            p.GetComponent<Player>().AddRespawnPoint(this.gameObject);
+                            owner = p;
+                            break;
+                        }
+                    }
+                    ChangeColors();
+                    //minionProgressMap[entry.Key] = TOTAL_PROGRESS;
+                    break;
+                }
+            }
+            if (minionCaptureStateChanged == true)
+                minionProgressMap.Clear();
+        }
+        else {
+            foreach (KeyValuePair<int, int> entry in minionProgressMap) {
+                if (entry.Value < 0) {
+                    if (entry.Key != playerId) {
+                        destroyed = true;
+                        Explode();
+                        minionProgressMap.Clear();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     [RPC]
 	void ChangeColors() {
-        switch (playerCaptured) {
+        switch (playerId) {
             case 1:
                 playerColor = Color.red;
                 break;
@@ -212,7 +238,8 @@ public class SparkPoint : MonoBehaviour {
 		particleSystem.Stop();
 		this.gameObject.renderer.material.color = Color.grey;
 		playerCaptured = -1;
-		owner.GetComponent<Player>().removeSpawnPoint(this.gameObject);
+        if (owner)
+		    owner.GetComponent<Player>().removeSpawnPoint(this.gameObject);
 	}
 
 	public bool GetParticles() {
@@ -224,12 +251,12 @@ public class SparkPoint : MonoBehaviour {
 	}
 
     [RPC]
-    void MinionCapture(int playerID) {
-        Debug.Log("Minion Capturing!");
-        if (captured) return;
-        if (minionProgressMap.ContainsKey(playerID)) 
-            minionProgressMap[playerID] -= PROGRESS_PER_MINION;
+    void MinionCapture(int pID) {
+        //Debug.Log("Minion Capturing!");
+        //if (captured) return;
+        if (minionProgressMap.ContainsKey(pID)) 
+            minionProgressMap[pID] -= PROGRESS_PER_MINION;
         else
-            minionProgressMap.Add(playerID, TOTAL_PROGRESS);
+            minionProgressMap.Add(pID, TOTAL_PROGRESS);
     }
 }

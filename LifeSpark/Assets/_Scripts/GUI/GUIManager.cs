@@ -27,7 +27,7 @@ public class GUIManager  {
 
 
 
-	public void addHealthBar(Boss boss)
+    public void addHealthBar(LivingObject boss)
 	{
 		GameObject g =   GameObject.Instantiate(Resources.Load ("healthBar", typeof(GameObject))) as GameObject;
 		g.transform.parent = m_uipanel.transform;

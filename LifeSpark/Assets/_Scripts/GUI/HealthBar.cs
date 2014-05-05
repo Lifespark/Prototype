@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HealthBar : MonoBehaviour {
-    Boss m_boss;
+    LivingObject m_boss;
     public UISprite fg;
     public GameObject root;
     public enum objType {
@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour {
         boss,
         none,
     }
-    public Boss boss {
+    public LivingObject boss {
         get {
             if (this.m_boss == null) {
 
@@ -38,7 +38,7 @@ public class HealthBar : MonoBehaviour {
             fg.transform.position = GUIManager.guiManager.m_uiCamera.ViewportToWorldPoint(pos);
             pos = fg.transform.localPosition;
             pos.x = Mathf.RoundToInt(pos.x);
-            pos.y = Mathf.RoundToInt(pos.y);
+            pos.y = Mathf.RoundToInt(pos.y + 20);
             pos.z = 0f;
             fg.transform.localPosition = pos;
         }
@@ -52,11 +52,13 @@ public class HealthBar : MonoBehaviour {
                     Debug.LogWarning("UI_Missing boss");
                     return;
                 }
+                /*
                 if (h <= 0) {
                     if (root != null) {
                         DestroyImmediate(root);
                     }
                 }
+                */
                 //TODO: change color
                 float length = 100f * h / 100;
                 Vector3 scale = fg.transform.localScale;

@@ -88,7 +88,7 @@ public class Projectile : MonoBehaviour {
 		}
 		if (collision.collider.tag == "Player") {
 			Debug.Log ("why");
-			collision.gameObject.networkView.RPC("ApplyDamage",RPCMode.AllBuffered);
+			collision.gameObject.networkView.RPC("ApplyDamage",RPCMode.AllBuffered, 5);
             Network.Destroy(GetComponent<NetworkView>().viewID);
         }
         if (collision.collider.tag == "Boss") {

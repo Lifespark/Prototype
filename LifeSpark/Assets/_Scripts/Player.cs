@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour {
+public class Player : LivingObject {
 
 	/* Player's variables. -jk */
 	private LinkedList<GameObject> respawnPoints;
@@ -31,6 +31,13 @@ public class Player : MonoBehaviour {
 
     public bool ismine = false;
 
+    void Awake() {
+        if (isInited)
+            return;
+        GUIManager.guiManager.addHealthBar(this);
+        isInited = true;
+    }
+
 	void Start () {
 		respawnPoints = new LinkedList<GameObject>();
 		networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
@@ -51,6 +58,8 @@ public class Player : MonoBehaviour {
         minionController = GetComponent<MinionController>();
 		//minionController = (GameObject) Instantiate (minionController);
         //minionController.GetComponent<MinionController>().id = playerId;
+
+        health = 20;
 	}
 	
 	void Update () {
@@ -64,6 +73,11 @@ public class Player : MonoBehaviour {
 		//	SyncedMovement ();
 		//}
         MovePlayer();
+
+        if (onHealthChanged != null) {
+            onHealthChanged(health);
+        }
+
 	}
 
 	void PlayerInput () {
@@ -74,6 +88,7 @@ public class Player : MonoBehaviour {
 
 		if (respawnTimer <= 0.0f && needRespawn) {
 			if (respawnPoint != null) {
+                health = 20;
 				Vector3 targetPos = new Vector3(respawnPoint.transform.position.x, 10.0f, respawnPoint.transform.position.z);
 				networkView.RPC("NetworkTeleport",RPCMode.Server,targetPos);
 				needRespawn = false;
@@ -212,11 +227,17 @@ public class Player : MonoBehaviour {
 		needRespawn = true;
 	}
 
-	[RPC] void ApplyDamage() {
+	[RPC] void ApplyDamage(int dmg) {
 		Debug.Log("called");
-		rigidbody.position = new Vector3 (0f,-5f,0f);
-		respawnTimer = 3.0f;
-		needRespawn = true;
+
+        health -= dmg;
+
+        if (health <= 0) {
+            health = 0;
+            rigidbody.position = new Vector3(0f, -5f, 0f);
+            respawnTimer = 3.0f;
+            needRespawn = true;
+        }
 	}
 
     [RPC]
