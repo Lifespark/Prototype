@@ -23,6 +23,8 @@ public class SparkPoint : MonoBehaviour {
 
     Dictionary<int, int> minionProgressMap = new Dictionary<int, int>();
 
+    NetworkManager NetMgr;
+
 	// Use this for initialization
 	void Start () {
 		particlesOn = false;
@@ -42,6 +44,8 @@ public class SparkPoint : MonoBehaviour {
 		Beam.SetWidth(0.2f, 0.2f);
 		Beam.useWorldSpace = true;
 		Beam.enabled = false;
+
+        NetMgr = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
 	}
 	
 	// Update is called once per frame
@@ -66,8 +70,8 @@ public class SparkPoint : MonoBehaviour {
 			else if (captured && stealing) {
 				captureTimer += Time.deltaTime;
 				if (captureTimer >= 3.0f) {
-					destroyed = true;
-					Explode();
+                    destroyed = true;
+                    Explode();
 				}
 				else if (captureTimer >= 2.5f) {
 					particleSystem.startSize = 5.0f;
@@ -180,6 +184,7 @@ public class SparkPoint : MonoBehaviour {
                 if (entry.Value < 0) {
                     if (entry.Key != playerId) {
                         destroyed = true;
+                        //NetMgr.SpawnItem(rigidbody.position);
                         Explode();
                         minionProgressMap.Clear();
                         break;
@@ -237,7 +242,7 @@ public class SparkPoint : MonoBehaviour {
 	void Explode() {
 		particleSystem.Stop();
 		this.gameObject.renderer.material.color = Color.grey;
-		playerCaptured = -1;
+        playerCaptured = -1;
         if (owner)
 		    owner.GetComponent<Player>().removeSpawnPoint(this.gameObject);
 	}

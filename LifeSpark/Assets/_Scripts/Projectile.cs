@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour {
 	}
 	
 	void Update () {
-		this.gameObject.renderer.material.color = Color.yellow;
+		//this.gameObject.renderer.material.color = Color.yellow;
 		if (networkView.isMine) {
 			ProjectileMovement();
 		}
@@ -88,11 +88,17 @@ public class Projectile : MonoBehaviour {
 		}
 		if (collision.collider.tag == "Player") {
 			Debug.Log ("why");
-			collision.gameObject.networkView.RPC("ApplyDamage",RPCMode.AllBuffered, 5);
+            if (this.gameObject.renderer.material.color == Color.red || this.gameObject.renderer.material.color == Color.blue)
+                collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 5);
+            else
+                collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 10);
             Network.Destroy(GetComponent<NetworkView>().viewID);
         }
         if (collision.collider.tag == "Boss") {
-            collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 5);
+            if (this.gameObject.renderer.material.color == Color.red || this.gameObject.renderer.material.color == Color.blue)
+                collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 5);
+            else
+                collision.gameObject.networkView.RPC("ApplyDamage", RPCMode.AllBuffered, 10);
             Network.Destroy(GetComponent<NetworkView>().viewID);
         }
 	}

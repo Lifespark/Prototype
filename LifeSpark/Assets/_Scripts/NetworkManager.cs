@@ -13,6 +13,7 @@ public class NetworkManager : MonoBehaviour {
 	public GameObject playerPrefab;
     public GameObject bossPrefab;
     public GameObject levelPrefab;
+    public GameObject itemPrefab;
 
     private int playerCount = 0;
     private bool isRefreshingHostList = false;
@@ -91,6 +92,10 @@ public class NetworkManager : MonoBehaviour {
         if (Network.isServer)
             Network.Instantiate(bossPrefab, new Vector3(0f, 15f, 0f), Quaternion.identity, 0);
     }
+    
+    public void SpawnItem(Vector3 pos) {
+        Network.Instantiate(itemPrefab, pos, Quaternion.identity, 0);
+    }   
 
 	public void DestroyNetworkObject (GameObject gameObject) {
 		Network.Destroy(gameObject);

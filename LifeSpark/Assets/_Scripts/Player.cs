@@ -28,7 +28,9 @@ public class Player : LivingObject {
 	private Vector3 syncStartPosition = Vector3.zero;
 	private Vector3 syncEndPosition = Vector3.zero;
     public GameObject projectilePrefab;
+    private Color projectileColor;
 
+    public bool itemBuff = false;
     public bool ismine = false;
 
     void Awake() {
@@ -237,6 +239,7 @@ public class Player : LivingObject {
             rigidbody.position = new Vector3(0f, -5f, 0f);
             respawnTimer = 3.0f;
             needRespawn = true;
+            networkManager.GetComponent<NetworkManager>().SpawnItem(this.gameObject.transform.position);
         }
 	}
 
@@ -249,7 +252,7 @@ public class Player : LivingObject {
         //bullet.GetComponent<Projectile>().SetProjectileColor(new Color(r, g, b));
         //bullet.GetComponent<Projectile>().SetProjectileId(id);
         bullet.networkView.RPC("SetProjectileId", RPCMode.AllBuffered, id);
-        bullet.networkView.RPC("SetProjectileColor", RPCMode.AllBuffered, r, g, b);
+        bullet.networkView.RPC("SetProjectileColor", RPCMode.AllBuffered, projectileColor.r, projectileColor.g, projectileColor.b);
         /*
         bullet.GetComponent<Projectile>().SetProjectileDirection(direction);
         bullet.GetComponent<Projectile>().SetProjectileId(id);
@@ -277,6 +280,13 @@ public class Player : LivingObject {
 		respawnPoints.AddLast(gameObject);
 	}
 
+    public void ItemBoost() {
+        if (this.gameObject.renderer.material.color == Color.red)
+            projectileColor = new Color(1f, 0.65f, 0f);
+        else if (this.gameObject.renderer.material.color == Color.blue)
+            projectileColor = new Color(0f, 1f, 0f);
+    }
+
     [RPC]
     void SetNetworkPlayer(NetworkPlayer np, int id) {
         if (np == Network.player) {
@@ -287,15 +297,19 @@ public class Player : LivingObject {
         switch (playerId) {
             case 1:
                 this.gameObject.renderer.material.color = Color.red;
+                projectileColor = Color.red;
                 break;
             case 2:
                 this.gameObject.renderer.material.color = Color.blue;
+                projectileColor = Color.blue;
                 break;
             case 3:
                 this.gameObject.renderer.material.color = Color.yellow;
+                projectileColor = Color.yellow;
                 break;
             case 4:
                 this.gameObject.renderer.material.color = Color.green;
+                projectileColor = Color.green;
                 break;
         }
     }
