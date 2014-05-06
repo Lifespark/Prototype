@@ -7,6 +7,7 @@ public class Player : LivingObject {
 	/* Player's variables. -jk */
 	private LinkedList<GameObject> respawnPoints;
 	private Vector3 translate;
+	private Vector3 teleportPosition;
 	private float correctingFactorMove;
 	private float correctingFactorSparkPoint;
 	private bool moveSparkPoint;
@@ -44,6 +45,7 @@ public class Player : LivingObject {
 		respawnPoints = new LinkedList<GameObject>();
 		networkManager = GameObject.FindGameObjectWithTag("NetworkManager");
 		translate = Vector3.zero;
+		teleportPosition = Vector3.zero;
 		correctingFactorMove = 0.1f;
 		correctingFactorSparkPoint = 0.7f;
 		moveSparkPoint = false;
@@ -111,15 +113,9 @@ public class Player : LivingObject {
                     networkView.RPC("NetworkMove", RPCMode.Server, hit.point);
 					moveSparkPoint = false;
 				}
-				/*
-				else if (hit.collider.tag == "SparkPoint")
-				{
-					translate = hit.collider.rigidbody.position;
-					moveSparkPoint = true;
-				}*/
                 else if (hit.collider.tag == "Player" && hit.collider.gameObject != this.gameObject || hit.collider.tag == "Boss")
 				{
-					translate = Vector3.zero;
+					networkView.RPC("NetworkMove",RPCMode.Server,Vector3.zero);
 					Vector3 projPosition = hit.collider.gameObject.transform.position - rigidbody.position;
 					projPosition.Normalize();
                     projPosition = projPosition * 2 + rigidbody.position;
@@ -131,9 +127,21 @@ public class Player : LivingObject {
 				}
 				else if (hit.collider.tag == "SparkPoint")
 				{
+					if (hit.collider.gameObject.GetComponent<SparkPoint>().GetPlayerCaptured()
+					    == playerId)
+					{
+						networkView.RPC("NetworkMove",RPCMode.Server,Vector3.zero);
+						teleportPosition = Vector3.Normalize(this.rigidbody.position - hit.collider.rigidbody.position);
+						teleportPosition += hit.collider.rigidbody.position;
+						teleportPosition.y = this.rigidbody.position.y;
+						networkView.RPC("NetworkTeleport",RPCMode.Server, teleportPosition);
+					}
 					//minionController.GetComponent<MinionController> ().targetNode = hit.collider.gameObject;
-                    //minionController.targetNode = hit.collider.gameObject;
-                    networkView.RPC("SetTargetNode", RPCMode.AllBuffered, hit.collider.gameObject.transform.position);
+					//minionController.targetNode = hit.collider.gameObject;
+					else 
+					{
+						networkView.RPC("SetTargetNode", RPCMode.AllBuffered, hit.collider.gameObject.transform.position);
+					}
 				}
 			}
 		}
