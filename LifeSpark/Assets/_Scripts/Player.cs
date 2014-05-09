@@ -94,7 +94,7 @@ public class Player : LivingObject {
 			if (respawnPoint != null) {
                 health = 20;
 				Vector3 targetPos = new Vector3(respawnPoint.transform.position.x, 10.0f, respawnPoint.transform.position.z);
-				networkView.RPC("NetworkTeleport",RPCMode.Server,targetPos);
+				networkView.RPC("NetworkRespawn",RPCMode.Server,targetPos);
 				needRespawn = false;
 			}
 		}
@@ -330,5 +330,13 @@ public class Player : LivingObject {
 	[RPC]
 	public void NetworkTeleport(Vector3 pos){
 		rigidbody.position = pos;
+	}
+
+	[RPC]
+	public void NetworkRespawn(Vector3 pos){
+		rigidbody.position = pos;
+		respawnTimer = -1;
+		needRespawn = false;
+		health = 20;
 	}
 }
