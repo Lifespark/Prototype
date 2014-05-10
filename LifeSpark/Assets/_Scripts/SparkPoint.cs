@@ -9,7 +9,7 @@ public class SparkPoint : MonoBehaviour {
 
 	const float captureTime = 1.5f;
 
-	private LineRenderer Beam;
+	//private LineRenderer Beam;
 	
 	bool particlesOn;
 	int playerCaptured;
@@ -37,15 +37,15 @@ public class SparkPoint : MonoBehaviour {
 		stealing = false;
 		destroyed = false;
 		
-		Beam = this.gameObject.AddComponent<LineRenderer>();
-		Beam.material = new Material (Shader.Find("Particles/Additive")); 
-		Beam.castShadows = false;
-		Beam.receiveShadows = false;
-		Beam.SetVertexCount(2);
-		Beam.SetColors(Color.white, Color.white);
-		Beam.SetWidth(0.2f, 0.2f);
-		Beam.useWorldSpace = true;
-		Beam.enabled = false;
+//		Beam = this.gameObject.AddComponent<LineRenderer>();
+//		Beam.material = new Material (Shader.Find("Particles/Additive")); 
+//		Beam.castShadows = false;
+//		Beam.receiveShadows = false;
+//		Beam.SetVertexCount(2);
+//		Beam.SetColors(Color.white, Color.white);
+//		Beam.SetWidth(0.2f, 0.2f);
+//		Beam.useWorldSpace = true;
+//		Beam.enabled = false;
 
         NetMgr = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
 	}
@@ -92,28 +92,28 @@ public class SparkPoint : MonoBehaviour {
 			Vector3 srcPos = gameObject.transform.position;
 			Vector3 dstPos;
 			float minDistance = 0;
-			Beam.SetPosition(0, srcPos);
+			//Beam.SetPosition(0, srcPos);
 			//Beam.SetPosition(1, new Vector3(1,1,1));
 			
 			IndividualMinionController[] minions = GameObject.FindObjectsOfType(typeof(IndividualMinionController))
 				as IndividualMinionController[];
-			Beam.enabled = false;
-			if(minions.Length>0)
-			{
-				for(int i =0;i<minions.Length;i++)
-				{
-					if (minions[i].minionId == playerId)
-						continue;
-					float distance = Vector3.Distance(minions[i].gameObject.transform.position,srcPos);
-					if (distance < minDistance || minDistance == 0)
-					{
-						minDistance = distance;
-						dstPos = minions[i].gameObject.transform.position;
-						Beam.SetPosition(1, dstPos);
-						Beam.enabled = true;
-					}
-				}
-			}
+			//Beam.enabled = false;
+//			if(minions.Length>0)
+//			{
+//				for(int i =0;i<minions.Length;i++)
+//				{
+//					if (minions[i].minionId == playerId)
+//						continue;
+//					float distance = Vector3.Distance(minions[i].gameObject.transform.position,srcPos);
+//					if (distance < minDistance || minDistance == 0)
+//					{
+//						minDistance = distance;
+//						dstPos = minions[i].gameObject.transform.position;
+//						Beam.SetPosition(1, dstPos);
+//						Beam.enabled = true;
+//					}
+//				}
+//			}
 		}
 	}
 

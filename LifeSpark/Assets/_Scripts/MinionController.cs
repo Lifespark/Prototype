@@ -19,7 +19,7 @@ public class MinionController : MonoBehaviour {
 		maxMinions = 3;
 		spawnRate = 0.2f;
         if (Network.isServer) {
-            StartCoroutine(SpawnMinionsCount());
+            //StartCoroutine(SpawnMinionsCount());
         }
 	}
 	
@@ -36,7 +36,7 @@ public class MinionController : MonoBehaviour {
             yield return new WaitForSeconds(spawnRate);
             //Check that there arent too many minions already
             if (minionsSpawned < maxMinions && targetNode != new Vector3(-123, -456, -789) && spawnNode != new Vector3(-123, -456, -789)) {
-                SpawnMinions();
+                //SpawnMinions();
                 //networkView.RPC("SpawnMinions", RPCMode.Server);
             }
             //Loop spawner
