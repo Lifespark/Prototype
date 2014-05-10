@@ -565,9 +565,9 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         triangleNWmesh = new Mesh();
         triangleNWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA0.transform.position.z),
-			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA1.transform.position.z), 
-			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB0.transform.position.z)
+			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA0.transform.position.z),
+			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA1.transform.position.z), 
+			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB0.transform.position.z)
 		};
         triangleNWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1) };
         MF.mesh = triangleNWmesh;
@@ -582,9 +582,9 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         triangleNEmesh = new Mesh();
         triangleNEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA6.transform.position.z),
-			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA5.transform.position.z), 
-			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB6.transform.position.z)
+			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA6.transform.position.z),
+			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA5.transform.position.z), 
+			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB6.transform.position.z)
 		};
         triangleNEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1) };
         MF.mesh = triangleNEmesh;
@@ -599,9 +599,9 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         triangleSEmesh = new Mesh();
         triangleSEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG6.transform.position.z),
-			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG5.transform.position.z), 
-			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF6.transform.position.z)
+			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG6.transform.position.z),
+			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG5.transform.position.z), 
+			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF6.transform.position.z)
 		};
         triangleSEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1) };
         MF.mesh = triangleSEmesh;
@@ -616,9 +616,9 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         triangleSWmesh = new Mesh();
         triangleSWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG0.transform.position.z),
-			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG1.transform.position.z), 
-			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF0.transform.position.z)
+			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG0.transform.position.z),
+			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG1.transform.position.z), 
+			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF0.transform.position.z)
 		};
         triangleSWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1) };
         MF.mesh = triangleSWmesh;
@@ -633,13 +633,13 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         doublePentagonNWmesh = new Mesh();
         doublePentagonNWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA0.transform.position.z),
-			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA1.transform.position.z), 
-			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB3.transform.position.z),
-			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC2.transform.position.z),
-			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD1.transform.position.z),
-			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD0.transform.position.z),
-			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB0.transform.position.z)
+			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA0.transform.position.z),
+			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA1.transform.position.z), 
+			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB3.transform.position.z),
+			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC2.transform.position.z),
+			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD1.transform.position.z),
+			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD0.transform.position.z),
+			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB0.transform.position.z)
 		};
         doublePentagonNWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = doublePentagonNWmesh;
@@ -654,13 +654,13 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         doublePentagonNEmesh = new Mesh();
         doublePentagonNEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA5.transform.position.z),
-			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA3.transform.position.z), 
-			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB3.transform.position.z),
-			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC4.transform.position.z),
-			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD5.transform.position.z),
-			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD6.transform.position.z),
-			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB6.transform.position.z)
+			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA5.transform.position.z),
+			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA3.transform.position.z), 
+			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB3.transform.position.z),
+			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC4.transform.position.z),
+			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD5.transform.position.z),
+			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD6.transform.position.z),
+			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB6.transform.position.z)
 		};
         doublePentagonNEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = doublePentagonNEmesh;
@@ -675,13 +675,13 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         doublePentagonSEmesh = new Mesh();
         doublePentagonSEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG5.transform.position.z),
-			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG3.transform.position.z), 
-			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF3.transform.position.z),
-			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE4.transform.position.z),
-			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD5.transform.position.z),
-			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD6.transform.position.z),
-			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF6.transform.position.z)
+			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG5.transform.position.z),
+			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG3.transform.position.z), 
+			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF3.transform.position.z),
+			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE4.transform.position.z),
+			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD5.transform.position.z),
+			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD6.transform.position.z),
+			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF6.transform.position.z)
 		};
         doublePentagonSEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = doublePentagonSEmesh;
@@ -696,13 +696,13 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         doublePentagonSWmesh = new Mesh();
         doublePentagonSWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG1.transform.position.z),
-			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG3.transform.position.z), 
-			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF3.transform.position.z),
-			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE2.transform.position.z),
-			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD1.transform.position.z),
-			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD0.transform.position.z),
-			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF0.transform.position.z)
+			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG1.transform.position.z),
+			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG3.transform.position.z), 
+			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF3.transform.position.z),
+			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE2.transform.position.z),
+			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD1.transform.position.z),
+			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD0.transform.position.z),
+			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF0.transform.position.z)
 		};
         doublePentagonSWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = doublePentagonSWmesh;
@@ -717,11 +717,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralNNWmesh = new Mesh();
         quadrilateralNNWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA0.transform.position.z),
-			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA1.transform.position.z), 
-			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA3.transform.position.z),
-			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB3.transform.position.z),
-			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC2.transform.position.z)
+			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA0.transform.position.z),
+			new Vector3(sparkPointA1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA1.transform.position.z), 
+			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA3.transform.position.z),
+			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB3.transform.position.z),
+			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC2.transform.position.z)
 		};
         quadrilateralNNWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralNNWmesh;
@@ -736,11 +736,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralWNWmesh = new Mesh();
         quadrilateralWNWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA0.transform.position.z),
-			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC2.transform.position.z), 
-			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD1.transform.position.z),
-			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD0.transform.position.z),
-			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB0.transform.position.z)
+			new Vector3(sparkPointA0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA0.transform.position.z),
+			new Vector3(sparkPointC2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC2.transform.position.z), 
+			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD1.transform.position.z),
+			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD0.transform.position.z),
+			new Vector3(sparkPointB0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB0.transform.position.z)
 		};
         quadrilateralWNWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralWNWmesh;
@@ -755,11 +755,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralNNEmesh = new Mesh();
         quadrilateralNNEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA6.transform.position.z),
-			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA5.transform.position.z), 
-			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA3.transform.position.z),
-			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB3.transform.position.z),
-			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC4.transform.position.z)
+			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA6.transform.position.z),
+			new Vector3(sparkPointA5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA5.transform.position.z), 
+			new Vector3(sparkPointA3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA3.transform.position.z),
+			new Vector3(sparkPointB3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB3.transform.position.z),
+			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC4.transform.position.z)
 		};
         quadrilateralNNEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralNNEmesh;
@@ -774,11 +774,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralENEmesh = new Mesh();
         quadrilateralENEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointA6.transform.position.z),
-			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointC4.transform.position.z), 
-			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD5.transform.position.z),
-			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD6.transform.position.z),
-			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointB6.transform.position.z)
+			new Vector3(sparkPointA6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointA6.transform.position.z),
+			new Vector3(sparkPointC4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointC4.transform.position.z), 
+			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD5.transform.position.z),
+			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD6.transform.position.z),
+			new Vector3(sparkPointB6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointB6.transform.position.z)
 		};
         quadrilateralENEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralENEmesh;
@@ -793,11 +793,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralSSEmesh = new Mesh();
         quadrilateralSSEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG6.transform.position.z),
-			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG5.transform.position.z), 
-			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG3.transform.position.z),
-			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF3.transform.position.z),
-			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE4.transform.position.z)
+			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG6.transform.position.z),
+			new Vector3(sparkPointG5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG5.transform.position.z), 
+			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG3.transform.position.z),
+			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF3.transform.position.z),
+			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE4.transform.position.z)
 		};
         quadrilateralSSEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralSSEmesh;
@@ -812,11 +812,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralESEmesh = new Mesh();
         quadrilateralESEmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG6.transform.position.z),
-			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE4.transform.position.z), 
-			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD5.transform.position.z),
-			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD6.transform.position.z),
-			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF6.transform.position.z)
+			new Vector3(sparkPointG6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG6.transform.position.z),
+			new Vector3(sparkPointE4.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE4.transform.position.z), 
+			new Vector3(sparkPointD5.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD5.transform.position.z),
+			new Vector3(sparkPointD6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD6.transform.position.z),
+			new Vector3(sparkPointF6.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF6.transform.position.z)
 		};
         quadrilateralESEmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralESEmesh;
@@ -831,11 +831,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralSSWmesh = new Mesh();
         quadrilateralSSWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG0.transform.position.z),
-			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG1.transform.position.z), 
-			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG3.transform.position.z),
-			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF3.transform.position.z),
-			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE2.transform.position.z)
+			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG0.transform.position.z),
+			new Vector3(sparkPointG1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG1.transform.position.z), 
+			new Vector3(sparkPointG3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG3.transform.position.z),
+			new Vector3(sparkPointF3.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF3.transform.position.z),
+			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE2.transform.position.z)
 		};
         quadrilateralSSWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralSSWmesh;
@@ -850,11 +850,11 @@ public class TerritoryColor : MonoBehaviour
         MR.material = this.renderer.material;
         quadrilateralWSWmesh = new Mesh();
         quadrilateralWSWmesh.vertices = new Vector3[] {
-			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointG0.transform.position.z),
-			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointE2.transform.position.z), 
-			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD1.transform.position.z),
-			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointD0.transform.position.z),
-			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.1f, sparkPointF0.transform.position.z)
+			new Vector3(sparkPointG0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointG0.transform.position.z),
+			new Vector3(sparkPointE2.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointE2.transform.position.z), 
+			new Vector3(sparkPointD1.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD1.transform.position.z),
+			new Vector3(sparkPointD0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointD0.transform.position.z),
+			new Vector3(sparkPointF0.transform.position.x, this.gameObject.transform.position.y + 0.001f, sparkPointF0.transform.position.z)
 		};
         quadrilateralWSWmesh.uv = new Vector2[] { new Vector2(1, 1), new Vector2(1, 0), new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, 1) };
         MF.mesh = quadrilateralWSWmesh;

@@ -5,11 +5,15 @@ public class LaneLight : MonoBehaviour {
 
 	public GameObject SparkPoint1;
 	public GameObject SparkPoint2;
-	Color defaultColor;
+	//Color defaultColor;
+	Material clearMaterial;
+	Material litMaterial;
 
 	// Use this for initialization
 	void Start () {
-		defaultColor = new Color(133.0f/255,255.0f/255,164.0f/255);
+		//defaultColor = new Color(133.0f/255,255.0f/255,164.0f/255);
+		clearMaterial = (Material)Resources.Load ("Clear");
+		litMaterial = gameObject.renderer.material;
 	}
 	
 	// Update is called once per frame
@@ -24,15 +28,19 @@ public class LaneLight : MonoBehaviour {
 					else if (SparkPoint1.GetComponent<SparkPoint>().GetPlayerCaptured() == 2) {
 						this.gameObject.renderer.material.color = Color.blue;
 					}*/
+					gameObject.renderer.material = litMaterial;
                     gameObject.renderer.material.color = SparkPoint1.renderer.material.color;
 				}
 				else {
-					this.gameObject.renderer.material.color = defaultColor;
+					this.gameObject.renderer.material = clearMaterial;
 				}
 			}
 			else {
-				this.gameObject.renderer.material.color = defaultColor;
+				this.gameObject.renderer.material = clearMaterial;
 			}
+		}
+		else {
+			this.gameObject.renderer.material = clearMaterial;
 		}
 	}
 }
