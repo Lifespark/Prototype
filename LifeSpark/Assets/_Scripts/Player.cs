@@ -37,7 +37,7 @@ public class Player : LivingObject {
     void Awake() {
         if (isInited)
             return;
-        GUIManager.guiManager.addHealthBar(this);
+        //GUIManager.guiManager.addHealthBar(this);
         isInited = true;
     }
 
@@ -338,5 +338,10 @@ public class Player : LivingObject {
 		respawnTimer = -1;
 		needRespawn = false;
 		health = 20;
+	}
+
+	void OnGUI(){
+
+		GUI.Label(new Rect(10, playerId*20, 100, 50), "Player" + playerId+  ": " + health);
 	}
 }

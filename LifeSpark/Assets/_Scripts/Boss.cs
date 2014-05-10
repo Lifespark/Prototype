@@ -14,7 +14,7 @@ public class Boss : LivingObject {
     void Awake() {
         if (isInited)
             return;
-        GUIManager.guiManager.addHealthBar(this);
+        //GUIManager.guiManager.addHealthBar(this);
         isInited = true;
 		mask = ~1<<12;
 		randomizeGoal();
@@ -72,7 +72,7 @@ public class Boss : LivingObject {
 	}
 
     void OnGUI() {
-        GUI.Label(new Rect(10, 10, 100, 50), "BOSS health: " + health);
+        GUI.Label(new Rect(10, 60, 100, 50), "BOSS health: " + health);
     }
 
 }
