@@ -7,6 +7,8 @@ public class SparkPoint : MonoBehaviour {
     const int PROGRESS_PER_MINION = 10;
     const int TOTAL_PROGRESS = 100;
 
+	const float captureTime = 1.5f;
+
 	private LineRenderer Beam;
 	
 	bool particlesOn;
@@ -53,7 +55,7 @@ public class SparkPoint : MonoBehaviour {
 		//if (Network.isServer) {
 			if (particlesOn && !captured) {
 				captureTimer += Time.deltaTime;
-				if (captureTimer >= 3.0f) {
+				if (captureTimer >= captureTime) {
 					player.GetComponent<Player>().AddRespawnPoint(this.gameObject);
 					owner = player;
 					captured = true;
