@@ -73,7 +73,12 @@ public class NetworkManager : MonoBehaviour {
     }
 
     private void SpawnPlayer(NetworkPlayer np, int id) {
-        GameObject playerObj = Network.Instantiate(playerPrefab, new Vector3(4*id, 10f, 2f), Quaternion.identity, 0) as GameObject;
+		GameObject playerObj;
+		if(id ==1)
+       		playerObj = Network.Instantiate(playerPrefab, new Vector3(-8f, 10f, 12f), Quaternion.identity, 0) as GameObject;
+		else 
+			playerObj = Network.Instantiate(playerPrefab, new Vector3(13f, 10f, -10f), Quaternion.identity, 0) as GameObject;
+
         playerObj.networkView.RPC("SetNetworkPlayer", RPCMode.AllBuffered, np, id);
     }
 
@@ -90,7 +95,7 @@ public class NetworkManager : MonoBehaviour {
 
     public void SpawnBoss() {
         if (Network.isServer)
-            Network.Instantiate(bossPrefab, new Vector3(0f, 15f, 0f), Quaternion.identity, 0);
+            Network.Instantiate(bossPrefab, new Vector3(2f, 15f, 1f), Quaternion.identity, 0);
     }
     
     public void SpawnItem(Vector3 pos) {
