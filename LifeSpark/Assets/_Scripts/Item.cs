@@ -21,7 +21,9 @@ public class Item : MonoBehaviour {
         {
 			Debug.Log("Item grabbed");
             collision.collider.GetComponent<Player>().ItemBoost();
-            Network.Destroy(GetComponent<NetworkView>().viewID);
+			if (networkView.isMine) {
+            	Network.Destroy(GetComponent<NetworkView>().viewID);
+			}
         }
     }
 }

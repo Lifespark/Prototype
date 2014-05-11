@@ -99,11 +99,13 @@ public class NetworkManager : MonoBehaviour {
     }
     
     public void SpawnItem(Vector3 pos) {
-        Network.Instantiate(itemPrefab, pos, Quaternion.identity, 0);
+		if (Network.isServer)
+        	Network.Instantiate(itemPrefab, pos, Quaternion.identity, 0);
     }   
 
 	public void DestroyNetworkObject (GameObject gameObject) {
-		Network.Destroy(gameObject);
+		if (networkView.isMine)
+			Network.Destroy(gameObject);
 	}
 	
 	// Update is called once per frame
