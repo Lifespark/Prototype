@@ -94,7 +94,7 @@ public class Player : LivingObject {
 			if (respawnPoint != null) {
                 health = 20;
 				Vector3 targetPos = new Vector3(respawnPoint.transform.position.x, 10.0f, respawnPoint.transform.position.z);
-				networkView.RPC("NetworkRespawn",RPCMode.Server,targetPos);
+				networkView.RPC("NetworkRespawn",RPCMode.AllBuffered,targetPos);
 				needRespawn = false;
 			}
 		}
@@ -341,7 +341,7 @@ public class Player : LivingObject {
 	}
 
 	void OnGUI(){
-
+		//Debug.Log (playerId + " " + health);
 		GUI.Label(new Rect(10, playerId*20, 100, 50), "Player" + playerId+  ": " + health);
 	}
 }
