@@ -18,7 +18,8 @@ public class LaneLightBoss : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((SparkPoint1.gameObject != null) && (SparkPoint2.gameObject != null)) {
+		if ((SparkPoint1.gameObject != null) && (SparkPoint2.gameObject != null) &&
+		    SparkPoint2.GetComponent<SparkPointBoss>().GetParticles()) {
 			if ((SparkPoint1.GetComponent<SparkPoint>().GetParticles()) && (SparkPoint1.renderer.material.color != new Color(1,1,1,1))) {
                 /*
 				if (SparkPoint1.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {

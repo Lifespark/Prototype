@@ -30,6 +30,12 @@ public class LaneLight : MonoBehaviour {
 					}*/
 					gameObject.renderer.material = litMaterial;
                     gameObject.renderer.material.color = SparkPoint1.renderer.material.color;
+
+					if (SparkPoint1.GetComponent<SparkPoint>().GetConnectedToOrigin() || SparkPoint2.GetComponent<SparkPoint>().GetConnectedToOrigin())
+					{
+						SparkPoint1.GetComponent<SparkPoint>().SetConnectedToOrigin();
+						SparkPoint2.GetComponent<SparkPoint>().SetConnectedToOrigin();
+					}
 				}
 				else {
 					this.gameObject.renderer.material = clearMaterial;

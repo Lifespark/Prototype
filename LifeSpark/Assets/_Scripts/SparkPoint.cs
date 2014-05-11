@@ -22,6 +22,7 @@ public class SparkPoint : MonoBehaviour {
     Color playerColor;
 	GameObject player;
 	GameObject owner;
+	bool connectedToOrigin;
 
     Dictionary<int, int> minionProgressMap = new Dictionary<int, int>();
 
@@ -46,6 +47,14 @@ public class SparkPoint : MonoBehaviour {
 //		Beam.SetWidth(0.2f, 0.2f);
 //		Beam.useWorldSpace = true;
 //		Beam.enabled = false;
+
+		if (gameObject.name == "SparkPointA0" || gameObject.name == "SparkPointG6") {
+			connectedToOrigin = true;
+			//Debug.Log ("Connected to origin");
+		} else {
+			connectedToOrigin = false;
+			//Debug.Log ("Not connected to origin");
+		}
 
         NetMgr = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
 	}
@@ -266,4 +275,15 @@ public class SparkPoint : MonoBehaviour {
         else
             minionProgressMap.Add(pID, TOTAL_PROGRESS);
     }
+
+	public bool GetConnectedToOrigin(){
+		return connectedToOrigin;
+	}
+
+	public void SetConnectedToOrigin(){
+		connectedToOrigin = true;
+		//Debug.Log ("Connected to origin");
+
+	}
+
 }

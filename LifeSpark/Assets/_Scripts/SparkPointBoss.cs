@@ -42,7 +42,7 @@ public class SparkPointBoss : MonoBehaviour {
 		inputTwo = false;
 
 		if (SparkPoint1.gameObject != null) {
-			if (SparkPoint1.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint1.GetComponent<SparkPoint>().GetParticles() && SparkPoint1.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint1.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -53,7 +53,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint2.gameObject != null) {
-			if (SparkPoint2.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint2.GetComponent<SparkPoint>().GetParticles() && SparkPoint2.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint2.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -64,7 +64,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint3.gameObject != null) {
-			if (SparkPoint3.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint3.GetComponent<SparkPoint>().GetParticles() && SparkPoint3.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint3.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -75,7 +75,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint4.gameObject != null) {
-			if (SparkPoint4.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint4.GetComponent<SparkPoint>().GetParticles() && SparkPoint4.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint4.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -86,7 +86,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint5.gameObject != null) {
-			if (SparkPoint5.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint5.GetComponent<SparkPoint>().GetParticles() && SparkPoint5.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint5.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -97,7 +97,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint6.gameObject != null) {
-			if (SparkPoint6.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint6.GetComponent<SparkPoint>().GetParticles() && SparkPoint6.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint6.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -108,7 +108,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint7.gameObject != null) {
-			if (SparkPoint7.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint7.GetComponent<SparkPoint>().GetParticles() && SparkPoint7.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint7.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
@@ -119,7 +119,7 @@ public class SparkPointBoss : MonoBehaviour {
 		}
 
 		if (SparkPoint8.gameObject != null) {
-			if (SparkPoint8.GetComponent<SparkPoint>().GetParticles()) {
+			if (SparkPoint8.GetComponent<SparkPoint>().GetParticles() && SparkPoint8.GetComponent<SparkPoint>().GetConnectedToOrigin()) {
 				if (SparkPoint8.GetComponent<SparkPoint>().GetPlayerCaptured() == 1) {
 					inputOne = true;
 				}
