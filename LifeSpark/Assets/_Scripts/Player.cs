@@ -290,7 +290,7 @@ public class Player : LivingObject {
 
     public void ItemBoost() {
         if (this.gameObject.renderer.material.color == Color.red)
-            projectileColor = new Color(1f, 0.65f, 0f);
+            projectileColor = new Color(1f, 0.40f, 0f);
         else if (this.gameObject.renderer.material.color == Color.blue)
             projectileColor = new Color(0f, 1f, 0f);
     }
